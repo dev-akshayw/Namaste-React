@@ -11,8 +11,7 @@ const Name = () => {
     </div>
    )
 
-}
-    
+}  
 
 const Head = () => (
     <div id="cont">
@@ -22,9 +21,17 @@ const Head = () => (
     </div>
 );
 
+const title2 = (
+    <div>
+        <h1>This is React Js Course</h1>
+        <Head />
+    </div>
+    
+);
+
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-root.render(<Head />)
+root.render(title2);
 
