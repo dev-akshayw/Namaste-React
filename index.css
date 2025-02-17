@@ -48,10 +48,15 @@ img.logo {
     flex-wrap: wrap;
     gap: 30px;
 }
+.res-card {
+    width: 30%;
+}
 .res-card img {
     width: 100%;
     max-width: 100%;
     aspect-ratio: 1.6;
     object-fit: cover;
 } 
-
+.filter {
+    margin: 16px;
+}
