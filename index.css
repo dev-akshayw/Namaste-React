@@ -1,3 +1,6 @@
+* {
+    box-sizing: border-box;
+}
 .header {
     display: flex;
     justify-content: space-between ;
@@ -43,20 +46,31 @@ img.logo {
     display: flex;
     gap: 20px;
 }
-.res-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-}
-.res-card {
-    width: 30%;
+.res-container, .shimmer-container {
+    gap: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 .res-card img {
     width: 100%;
     max-width: 100%;
     aspect-ratio: 1.6;
     object-fit: cover;
+    height: 200px;
 } 
 .filter {
     margin: 16px;
+}
+.shimmer-card {
+    height: 400px;
+    background-color: rgb(202, 202, 202);
+}
+.login {
+    background-color: rgb(206, 206, 206);
+    padding: 0 14px;
+    cursor: pointer;
+}
+.filter {
+    display: flex;
+    column-gap: 30px;
 }
