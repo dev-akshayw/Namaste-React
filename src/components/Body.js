@@ -37,15 +37,15 @@ export const Body = () => {
         <Shimmer />
     ) : (
         <div className="body">
-            <div className="filter">
+            <div className="filter flex gap-24 py-8 px-4">
 
                 <div className="search">
-                    <input type="text" placeholder="search" className="search-box" value={searchText}
+                    <input type="text" placeholder="search" className="search-box border" value={searchText}
                         onChange={(e) => {
                             setSearchText(e.target.value);
                         }}
                     />
-                    <button onClick={() => {
+                    <button className="bg-orange-400 py-1 px-4" onClick={() => {
                         const filterRestaurant = listOfRestaurants.filter((res) =>  
                             res.info.name.toLowerCase().includes(searchText.toLocaleLowerCase())
                         );
@@ -53,7 +53,7 @@ export const Body = () => {
                     }}>search</button>
                 </div>
 
-                <button className="filter-btn" onClick={() =>{
+                <button className="bg-orange-400 py-1 px-4" onClick={() =>{
                     let filterList = listOfRestaurants.filter((res) => res.info.avgRating > 4.3 );
                     setFilterRestaurant(filterList);
                 }}>
@@ -61,10 +61,10 @@ export const Body = () => {
                 </button>
                 
             </div>
-            <div className="res-container">
+            <div className="res-container grid grid-cols-6 gap-8">
                 {/* <RestaurantCard resData={restrautList[0]}/> */}
                 {filterRestaurant.map((restaurant) => (
-                    <Link  key={restaurant.info.id}  to={"/restaurants/"+ restaurant.info.id }>
+                    <Link className="bg-gray-200 p-3"  key={restaurant.info.id}  to={"/restaurants/"+ restaurant.info.id }>
                         <RestaurantCard resData={restaurant} />
                     </Link>
                 ))}

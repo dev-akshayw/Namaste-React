@@ -6,7 +6,7 @@ import useOnlineStatus from "../utils/useOnlineStatus";
 const Title = () => (
     <Link to="/">
     <img
-      className="logo"
+      className="logo flex w-[150px]"
       alt="logo"
       src={LOGO_URL}
     />
@@ -18,10 +18,10 @@ const Header = () => {
     const [btnNameText, setBtnNameText] = useState("Login");    
     const onlineStatus = useOnlineStatus();
     return(
-        <div className="header">
+        <div className="header flex py-8 px-4 items-center justify-between">
             <Title />
             <div className="nav-items">
-                <ul>
+                <ul className="flex gap-5">
                 <li>online Status: {onlineStatus ? "yes" : "no"} </li>
                 <li><Link to="/" >Home </Link> </li>
                 <li><Link to="/about" > About </Link> </li>
