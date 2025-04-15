@@ -1,8 +1,9 @@
-import RestaurantCard from "./RestaurantCard";
-import { useEffect, useState } from "react";
+import RestaurantCard, {withPromtedLabel} from "./RestaurantCard";
+import { useEffect, useState, useContext } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 export const Body = () => {
 
@@ -10,6 +11,8 @@ export const Body = () => {
 
     const [searchText, setSearchText] = useState("");
     const [filterRestaurant, setFilterRestaurant] = useState("");
+
+    const RestaurantCardPromoted = withPromtedLabel(RestaurantCard);
 
     useEffect(() => {
         fetchData();
@@ -24,7 +27,7 @@ export const Body = () => {
         setlistOfRestaurants(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
         setFilterRestaurant(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
     }
-    // console.log(listOfRestaurants);
+    console.log(listOfRestaurants);
 
     const onlineStatus = useOnlineStatus();
 
@@ -32,6 +35,8 @@ export const Body = () => {
         return (
             <h1> Looks like you are offline, please check your internet connection. </h1>
         );
+
+    const {setUserName, loggedInUser } = useContext(UserContext);
 
     return listOfRestaurants.length === 0 ? (
         <Shimmer />
@@ -59,13 +64,30 @@ export const Body = () => {
                 }}>
                     Top Rated Customers
                 </button>
+
+                <div>
+                    <label>User Name</label>
+                    <input 
+                        className="border p-1  border-black"  
+                        value={loggedInUser}
+                        onChange={(e) => setUserName(e.target.value)}
+                    />
+                </div>
                 
             </div>
             <div className="res-container grid grid-cols-6 gap-8">
                 {/* <RestaurantCard resData={restrautList[0]}/> */}
                 {filterRestaurant.map((restaurant) => (
-                    <Link className="bg-gray-200 p-3"  key={restaurant.info.id}  to={"/restaurants/"+ restaurant.info.id }>
-                        <RestaurantCard resData={restaurant} />
+                    <Link className="bg-gray-200 p-3 relative "  key={restaurant.info.id}  to={"/restaurants/"+ restaurant.info.id }>
+                       
+                        {
+                            restaurant?.info?.isOpen ? ( 
+                                <RestaurantCardPromoted resData={restaurant} /> 
+                            ) : (
+                                <RestaurantCard resData={restaurant} />
+                            ) 
+                        }
+
                     </Link>
                 ))}
             </div>

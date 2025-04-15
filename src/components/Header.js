@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { LOGO_URL } from "../utils/constant";
 import { Link } from "react-router";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 const Title = () => (
     <Link to="/">
@@ -17,6 +18,9 @@ const Title = () => (
 const Header = () => {
     const [btnNameText, setBtnNameText] = useState("Login");    
     const onlineStatus = useOnlineStatus();
+
+    const {loggedInUser} = useContext(UserContext);
+
     return(
         <div className="header flex py-8 px-4 items-center justify-between">
             <Title />
@@ -34,6 +38,7 @@ const Header = () => {
                 >
                     {btnNameText}
                 </button>
+                <li className="font-bold"> {loggedInUser}  </li>
                 </ul>
             </div>
         </div>
