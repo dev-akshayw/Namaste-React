@@ -8,6 +8,9 @@ import Contact from "./components/Contact";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
 import UserContext from "./utils/UserContext"; 
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
+import Cart from "./components/Cart";
 // import Grocery from "./components/Grocert";
 
 const Footer = () => {
@@ -29,6 +32,7 @@ const AppLayout = () => {
     }, []);
 
     return (
+            <Provider store={appStore}>
             <UserContext.Provider value={ {loggedInUser : userName, setUserName} }>
                 <div className="app">
                     <Header />
@@ -36,6 +40,7 @@ const AppLayout = () => {
                     <Footer />
                 </div> 
             </UserContext.Provider>
+            </Provider>
     );
 };
 
@@ -63,6 +68,10 @@ const appRouter = createBrowserRouter([
             {
                 path: "/grocery",
                 element: <Suspense fallback={ <h2>Loading...</h2> } >  <Grocery /> </Suspense>,
+            },
+            {
+                path: "/cart",
+                element: <Cart />
             }
         ],
         errorElement: <Error />,
